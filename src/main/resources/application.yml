@@ -1,0 +1,63 @@
+#向eureka注册自己，端口为8769，服务名为service-zuul；以/api-a/ 开头的请求都指向service-ribbon；
+#以/api-b/开头的请求都指向service-feign；
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+server:
+  port: 8080
+spring:
+  application:
+    name: zuul
+#  此处配置可以允许cloud服务放到同一个tomcat下面
+  jmx:
+    default-domain: zuul
+#    超时配置
+zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+#    下边的一般不用配置
+#zuul:
+##忽略列表
+#  ignoredServices: '*'
+#  routes:
+#    #账户
+#    account:
+#      path: /account/**
+#      serviceId: account
+#      #组织结构
+#    structure:
+#      path: /structure/**
+#      serviceId: structure
+#    #权限
+#    jurisdiction:
+#      path: /jurisdiction/**
+#      serviceId: jurisdiction
+#
+##  要实现负载均衡必须关闭此项
+#ribbon:
+#  eureka:
+#    enabled: false
+##    设置负载均衡集合,多个地址用','隔开(域名或ip)
+#account:
+#  ribbon:
+#    listOfServers: localhost:9003
+#jurisdiction:
+#  ribbon:
+#    listOfServers: localhost:9004
+#structure:
+#  ribbon:
+#    listOfServers: localhost:9005
