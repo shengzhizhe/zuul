@@ -1,4 +1,4 @@
-package org.cloud;
+package org.zuul.com;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

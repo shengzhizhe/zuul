@@ -1,4 +1,4 @@
-package org.cloud.fallback;
+package org.zuul.com.fallback;
 
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.http.HttpHeaders;
@@ -39,7 +39,7 @@ public class AccountfallBack implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("账号服务器宕机".getBytes());
+                return new ByteArrayInputStream("账号服务器宕机".getBytes("UTF-8"));
             }
 
             @Override
@@ -81,7 +81,7 @@ public class AccountfallBack implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("账号服务器宕机".getBytes());
+                return new ByteArrayInputStream("账号服务器宕机".getBytes("UTF-8"));
             }
 
             @Override
