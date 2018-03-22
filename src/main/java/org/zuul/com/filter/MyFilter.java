@@ -1,9 +1,12 @@
 package org.zuul.com.filter;
 
 import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -19,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyFilter extends ZuulFilter {
 
-    private static Logger log = LoggerFactory.getLogger(MyFilter.class);
+    private static Logger logger = LoggerFactory.getLogger(MyFilter.class);
 
     @Override
     public String filterType() {
@@ -33,14 +36,14 @@ public class MyFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return false;
+        return true;
     }
 
     @Override
     public Object run() {
-        log.info("进入过滤器");
-//        RequestContext ctx = RequestContext.getCurrentContext();
-//        HttpServletRequest request = ctx.getRequest();
+        logger.info("进入过滤器");
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
 //        String username = request.getParameter("username");
 ////        String str = service.getByLoginName(username);
 ////        String email = (String) request.getSession().getAttribute("user.email");
@@ -68,7 +71,7 @@ public class MyFilter extends ZuulFilter {
 //
 //            return null;
 //        }
-        log.info("ok");
+        logger.info("ok");
         return null;
     }
 }
