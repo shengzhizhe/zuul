@@ -44,6 +44,8 @@ public class MyFilter extends ZuulFilter {
         logger.info("进入过滤器");
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
+        String method = request.getMethod();
+        logger.info(method);
 //        String username = request.getParameter("username");
 ////        String str = service.getByLoginName(username);
 ////        String email = (String) request.getSession().getAttribute("user.email");
